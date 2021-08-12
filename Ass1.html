@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change_col_button</title>
+</head>
+<body>
+  
+<h1>Please Click the Button! </h1><br>
+<div>
+<button id=green onclick="Green()">Green</button>
+<button id=red onclick="Red()">Red</button>
+<button id=yellow onclick="Yellow()">Yellow</button>
+</div>
+</body>
+</html>
+<style>
+ 
+ body{
+   display: flex;
+   justify-content: center;
+   background-color: gray;
+ }
+button{
+  padding: 10px 20px;
+  margin: 5px;
+  background-color:black;
+  border: none;
+  outline: none;
+  color: rgb(255, 240, 240);
+  border-radius: 5px;
+ 
+}
+</style>
+<script>
+ 
+ function Green() {
+
+document.getElementById('green'). style.backgroundColor = "green";
+ }
+function Red(){
+document.getElementById('red'). style.backgroundColor = "red";
+}
+function Yellow(){
+  document.getElementById('yellow'). style.backgroundColor = "yellow";
+
+}
+</script>

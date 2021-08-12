@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image</title>
+    <!--    Script to upload and download image from hard disk drive-->
+    <script type="text/javascript">
+      var loadFile = function (event) {
+        var image = document.getElementById("uploadedPhoto");
+        image.src = URL.createObjectURL(event.target.files[0]);
+      };
+      function downImg(linkElement) {
+        var image = document.getElementById("uploadedPhoto");
+        var myImage = image.src;
+        linkElement.href = myImage;
+      }
+    </script>
+    <!--Script to capture via image via Web Cam and download it.   -->
+
+    <script type="text/javascript" src="./webcam.js"></script>
+
+    <script>
+      var webcamElement = null;
+      var canvasElement = null;
+      var webcam = null;
+      function initvar() {
+        webcamElement = document.getElementById("webcam");
+        canvasElement = document.getElementById("canvas");
+        webcam = new Webcam(webcamElement, "user", canvasElement);
+      }
+
+      function startCam() {
+        webcam
+          .start()
+          .then((result) => {
+            console.log("webcam sdcsdf");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+      function capture() {
+        let picture = webcam.snap();
+
+        document.querySelector("#capturedPhoto").href = picture;
+        var image = document.getElementById("capturedPhoto");
+        image.src = picture;
+      }
+      function downCapImg(linkElement) {
+        var image = document.getElementById("capturedPhoto");
+        var myImage = image.src;
+        linkElement.href = myImage;
+      }
+    </script>
+    <style>
+      td {
+        text-align: center;
+      }
+      a:link {
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body onload="initvar()">
+    <table style="table-layout: fixed; width: 100%">
+      <colgroup>
+        <col style="width: auto" />
+
+        <col style="width: 33.3333%" />
+
+        <col style="width: 33.3333%" />
+      </colgroup>
+      <th>
+        <input
+          type="file"
+          accept="image/*"
+          name="image"
+          id="file"
+          onchange="loadFile(event)"
+        />
+      </th>
+      <th>
+        <button onclick="startCam()">Start Camera</button
+        ><button onclick="capture()">Capture</button>
+      </th>
+      <th>Display Camera Photo</th>
+
+      <tr>
+        <td><img id="uploadedPhoto" height="300" /></td>
+        <td>
+          <video id="webcam" autoplay playsinline width="400"></video>
+          <canvas id="canvas" style="display: none"></canvas>
+        </td>
+        <td><img id="capturedPhoto" height="300" /></td>
+      </tr>
+      <tr>
+        <td><a href="" onclick="downImg(this)" download> Download Image</a></td>
+        <td></td>
+        <td>
+          <a href="" onclick="downCapImg(this)" download> Download Image</a>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

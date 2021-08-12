@@ -1,0 +1,229 @@
+<!doctype html>
+
+<head>
+    Upload Image
+</head>
+
+<body>
+    <div class="image-upload-one">
+        <div class="center">
+          <div class="form-input">
+            <label for="file-ip-1">
+              <img id="file-ip-1-preview" src="https://i.ibb.co/ZVFsg37/default.png">
+              <button type="button" class="imgRemove" onclick="myImgRemoveFunctionOne()"></button>
+            </label>
+            <input type="file"  name="img_one" id="file-ip-1" accept="image/*" onchange="showPreviewOne(event);">
+          </div>
+          <button value="upload-img" onchange="showPreviewOne(event);">Choose File</button>
+          <!-- <small class="small">Use the &#8634; icon to reset the image</small> -->
+        </div>
+      </div>
+    <div class="contentarea">
+        <h1>
+            Using Javascript to capture Photo
+        </h1>
+        <div class="camera">
+            <video id="video">Video stream not available.</video>
+        </div>
+        <div><button id="startbutton">Take photo</button></div>
+        <canvas id="canvas"></canvas>
+        <div class="output">
+            <img id="photo" alt="The screen capture will appear in this box.">
+        </div>
+    </div>
+
+    <script>
+    /* JS comes here */
+    (function() {
+
+        var width = 320; // We will scale the photo width to this
+        var height = 0; // This will be computed based on the input stream
+
+        var streaming = false;
+
+        var video = null;
+        var canvas = null;
+        var photo = null;
+        var startbutton = null;
+
+        function startup() {
+            video = document.getElementById('video');
+            canvas = document.getElementById('canvas');
+            photo = document.getElementById('photo');
+            startbutton = document.getElementById('startbutton');
+
+            navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: false
+                })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(err) {
+                    console.log("An error occurred: " + err);
+                });
+
+            video.addEventListener('canplay', function(ev) {
+                if (!streaming) {
+                    height = video.videoHeight / (video.videoWidth / width);
+
+                    if (isNaN(height)) {
+                        height = width / (4 / 3);
+                    }
+
+                    video.setAttribute('width', width);
+                    video.setAttribute('height', height);
+                    canvas.setAttribute('width', width);
+                    canvas.setAttribute('height', height);
+                    streaming = true;
+                }
+            }, false);
+
+            startbutton.addEventListener('click', function(ev) {
+                takepicture();
+                ev.preventDefault();
+            }, false);
+
+            clearphoto();
+        }
+
+
+        function clearphoto() {
+            var context = canvas.getContext('2d');
+            context.fillStyle = "#AAA";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            var data = canvas.toDataURL('image/png');
+            photo.setAttribute('src', data);
+        }
+
+        function takepicture() {
+            var context = canvas.getContext('2d');
+            if (width && height) {
+                canvas.width = width;
+                canvas.height = height;
+                context.drawImage(video, 0, 0, width, height);
+
+                var data = canvas.toDataURL('image/png');
+                photo.setAttribute('src', data);
+            } else {
+                clearphoto();
+            }
+        }
+
+        window.addEventListener('load', startup, false);
+    })();
+    function showPreviewOne(event){
+      if(event.target.files.length > 0){
+        let src = URL.createObjectURL(event.target.files[0]);
+        let preview = document.getElementById("file-ip-1-preview");
+        preview.src = src;
+        preview.style.display = "block";
+      } 
+    }
+    function myImgRemoveFunctionOne() {
+      document.getElementById("file-ip-1-preview").src = "https://i.ibb.co/ZVFsg37/default.png";
+    }
+    </script>
+</body>
+
+</html>
+<style>
+    .center {
+display:inline;
+margin: 3px;
+}
+
+.form-input {
+width:100px;
+padding:3px;
+background:#fff;
+border:2px dashed dodgerblue;
+}
+.form-input input {
+display:none;
+}
+.form-input label {
+display:block;
+width:100px;
+height: auto;
+max-height: 100px;
+background:#333;
+border-radius:10px;
+cursor:pointer;
+}
+
+.form-input img {
+width:100px;
+height: 100px;
+margin: 2px;
+opacity: .4;
+}
+
+.imgRemove{
+position: relative;
+bottom: 114px;
+left: 68%;
+background-color: transparent;
+border: none;
+font-size: 30px;
+outline: none;
+}
+.imgRemove::after{
+content: ' \21BA';
+color: #fff;
+font-weight: 900;
+border-radius: 8px;
+cursor: pointer;
+}
+.small{
+color: firebrick;
+}
+/* CSS comes here */
+#video {
+    border: 1px solid black;
+    width: 320px;
+    height: 240px;
+}
+
+#photo {
+    border: 1px solid black;
+    width: 320px;
+    height: 240px;
+}
+
+#canvas {
+    display: none;
+}
+
+.camera {
+    width: 340px;
+    display: inline-block;
+}
+
+.output {
+    width: 340px;
+    display: inline-block;
+}
+
+#startbutton {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 36px;
+    padding: 5px;
+    background-color: #6a67ce;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 1.0);
+    cursor: pointer;
+}
+
+.contentarea {
+    font-size: 16px;
+    font-family: Arial;
+    text-align: center;
+}
+</style>

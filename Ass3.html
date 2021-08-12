@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+</head>
+
+<body>
+	<form>
+		First Number:<input type="text" id="firstnumber" /><br>
+		Second Number:<input type="text" id="secondnumber" /><br>
+		<input type="button" onclick="Addition()" value="Addition">
+		<input type="button" onclick="Subtraction()" value="Subtraction">
+		<input type="button" onclick="Multiplication()" value="Multiplication">
+		<input type="button" onclick="Division()" value="Division">
+		<input type="button" onclick="Modulous()" value="Modulous">
+	</form>
+	<p>Result:<br>
+		<span id="result"></span>
+	</p>
+</body>
+
+</html>
+
+<script>
+
+	function Addition() {
+		var num1 = parseInt(document.getElementById("firstnumber").value);
+		var num2 = parseInt(document.getElementById("secondnumber").value);
+		if ((num1) < 0 || isNaN(num2)) {
+
+			alert("Enter invalid number");
+
+		}
+		else {
+			document.getElementById("result").innerHTML = num1 + num2;
+		}
+	}
+	function Subtraction() {
+		var num1 = parseInt(document.getElementById("firstnumber").value);
+		var num2 = parseInt(document.getElementById("secondnumber").value);
+		if ((num1) < 0 || isNaN(num2)) {
+
+			alert("Enter invalid number");
+
+		}
+		else {
+			document.getElementById("result").innerHTML = num1 - num2;
+		}
+
+	}
+	function Multiplication() {
+		var num1 = parseInt(document.getElementById("firstnumber").value);
+		var num2 = parseInt(document.getElementById("secondnumber").value);
+		if ((num1) < 0 || isNaN(num2)) {
+
+			alert("Enter invalid number");
+
+		}
+		else {
+			document.getElementById("result").innerHTML = num1 * num2;
+		}
+	}
+	function Division() {
+		var num1 = parseInt(document.getElementById("firstnumber").value);
+		var num2 = parseInt(document.getElementById("secondnumber").value);
+		if ((num1) < 0 || isNaN(num2)) {
+
+			alert("Enter invalid number");
+
+		}
+		else {
+			document.getElementById("result").innerHTML = num1 / num2;
+		}
+
+	}
+	function Modulous() {
+		var num1 = parseInt(document.getElementById("firstnumber").value);
+		var num2 = parseInt(document.getElementById("secondnumber").value);
+		if ((num1) < 0 || isNaN(num2)) {
+
+			alert("Enter invalid number");
+
+		}
+		else {
+			document.getElementById("result").innerHTML = num1 % num2;
+		}
+
+
+	}
+</script>

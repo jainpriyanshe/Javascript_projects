@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validate</title>
+</head>
+
+<body>
+    <form>
+        <input type="button" id="number1" value="0" onclick="incrementValue1()" />
+        <input type="button" id="number2" value="0" onclick="incrementValue2()" />
+        <input type="button" id="number3" value="0" onclick="incrementValue3()" />
+        <input type="button" id="validate" onclick="Validate()" value="Validate" />
+    </form>
+</body>
+
+</html>
+
+<script>
+    var flag1 = 0;
+    var flag2 = 0;
+    var flag3 = 0;
+    var incID = null;
+
+    function incrementValue1() {
+        var value = document.getElementById("number1").value;
+        if (flag1 == 0 && flag2 == 0 && flag3 == 0) {
+            incID = "number1";
+        }
+
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById("number1").value = value;
+        flag1++;
+    }
+    function incrementValue2() {
+        var value = document.getElementById("number2").value;
+        if (flag1 == 0 && flag2 == 0 && flag3 == 0) {
+            incID = "number2";
+        }
+
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById("number2").value = value;
+        flag2++;
+    }
+    function incrementValue3() {
+        var value = document.getElementById("number3").value;
+        if (flag1 == 0 && flag2 == 0 && flag3 == 0) {
+            incID = "number3";
+        }
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById("number3").value = value;
+        flag3++;
+    }
+    function Validate() {
+        if (flag1 == 0) {
+            var value1 = document.getElementById("number1").value;
+            value1++;
+            document.getElementById("number1").value = value1;
+        }
+        if (flag2 == 0) {
+            var value2 = document.getElementById("number2").value;
+            value2++;
+            document.getElementById("number2").value = value2;
+        }
+        if (flag3 == 0) {
+            var value3 = document.getElementById("number3").value;
+            value3++;
+            document.getElementById("number3").value = value3;
+        }
+        if (flag1 != 0 && flag2 != 0 && flag3 != 0) {
+            let inct = document.getElementById(incID).value;
+            inct++;
+            document.getElementById(incID).value = inct;
+        }
+       
+    }
+</script>
+<style>
+    body{
+        background-color: rgb(255, 255, 255);
+    }
+    form{
+        position: relative;
+        color: blanchedalmond;
+        bottom: unset;
+    }
+</style>
